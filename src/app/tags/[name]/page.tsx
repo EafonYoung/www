@@ -1,0 +1,10 @@
+import { redirect } from "next/navigation";
+
+export default async function TagRedirectPage({
+  params,
+}: {
+  params: Promise<{ name: string }>;
+}) {
+  const { name } = await params;
+  redirect(`/notes?tag=${encodeURIComponent(name)}`);
+}

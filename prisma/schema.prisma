@@ -1,0 +1,137 @@
+// Schema 与 ../blog/prisma/schema.prisma 保持同步，迁移由 blog 项目维护。
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ==================== 笔记模块 ====================
+
+model Folder {
+  id        String   @id @default(uuid())
+  name      String
+  parentId  String?
+  parent    Folder?  @relation("FolderTree", fields: [parentId], references: [id])
+  children  Folder[] @relation("FolderTree")
+  notes     Note[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("folders")
+}
+
+model Note {
+  id          String    @id @default(uuid())
+  title       String
+  content     String    @default("") @db.Text
+  folderId    String?
+  folder      Folder?   @relation(fields: [folderId], references: [id])
+  tags        NoteTag[]
+  images      Image[]
+  published   Boolean   @default(false)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+
+  @@index([folderId])
+  @@index([deletedAt])
+  @@index([published])
+  @@map("notes")
+}
+
+model Tag {
+  id    String    @id @default(uuid())
+  name  String    @unique
+  notes NoteTag[]
+
+  @@map("tags")
+}
+
+model NoteTag {
+  noteId String
+  tagId  String
+  note   Note   @relation(fields: [noteId], references: [id], onDelete: Cascade)
+  tag    Tag    @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([noteId, tagId])
+  @@map("note_tags")
+}
+
+model Image {
+  id        String   @id @default(uuid())
+  noteId    String
+  note      Note     @relation(fields: [noteId], references: [id], onDelete: Cascade)
+  filename  String
+  path      String
+  createdAt DateTime @default(now())
+
+  @@index([noteId])
+  @@map("images")
+}
+
+// ==================== 书签模块 ====================
+
+model BookmarkCategory {
+  id        String     @id @default(uuid())
+  name      String
+  order     Int        @default(0)
+  bookmarks Bookmark[]
+  createdAt DateTime   @default(now())
+
+  @@map("bookmark_categories")
+}
+
+model Bookmark {
+  id         String            @id @default(uuid())
+  name       String
+  url        String
+  categoryId String?
+  category   BookmarkCategory? @relation(fields: [categoryId], references: [id])
+  icon       String?
+  published  Boolean           @default(true)
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
+
+  @@index([categoryId])
+  @@map("bookmarks")
+}
+
+// ==================== 门户站点配置 ====================
+
+model SiteConfig {
+  id        Int      @id @default(autoincrement())
+  key       String   @unique
+  value     String   @db.Text
+  updatedAt DateTime @updatedAt
+
+  @@map("site_config")
+}
+
+// ==================== AI 配置 ====================
+
+model AiSetting {
+  id        Int      @id @default(1)
+  provider  String
+  apiKey    String
+  baseUrl   String
+  model     String
+  updatedAt DateTime @updatedAt
+
+  @@map("ai_settings")
+}
+
+// ==================== 账号 ====================
+
+model User {
+  id           String   @id @default(uuid())
+  username     String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("users")
+}

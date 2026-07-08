@@ -1,0 +1,202 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+
+@theme inline {
+  --color-primary: var(--color-primary);
+  --color-primary-focus: var(--color-primary-focus);
+  --color-primary-on-dark: var(--color-primary-on-dark);
+  --color-ink: var(--color-ink);
+  --color-body: var(--color-body);
+  --color-body-on-dark: var(--color-body-on-dark);
+  --color-body-muted: var(--color-body-muted);
+  --color-ink-muted-80: var(--color-ink-muted-80);
+  --color-ink-muted-48: var(--color-ink-muted-48);
+  --color-canvas: var(--color-canvas);
+  --color-canvas-parchment: var(--color-canvas-parchment);
+  --color-surface-pearl: var(--color-surface-pearl);
+  --color-surface-tile-1: var(--color-surface-tile-1);
+  --color-surface-tile-2: var(--color-surface-tile-2);
+  --color-surface-tile-3: var(--color-surface-tile-3);
+  --color-surface-black: var(--color-surface-black);
+  --color-hairline: var(--color-hairline);
+  --font-sans: var(--font-text);
+  --font-display: var(--font-display);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-pill: var(--radius-pill);
+}
+
+@layer base {
+  * {
+    @apply border-hairline;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-canvas text-ink antialiased;
+    font-family: var(--font-text);
+    font-size: 17px;
+    line-height: 1.47;
+    letter-spacing: -0.374px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+  }
+
+  a {
+    @apply text-primary transition-opacity;
+  }
+
+  a:active {
+    opacity: 0.7;
+  }
+}
+
+@layer utilities {
+  .text-hero-display {
+    font-family: var(--font-display);
+    font-size: 56px;
+    font-weight: 600;
+    line-height: 1.07;
+    letter-spacing: -0.28px;
+  }
+
+  .text-display-lg {
+    font-family: var(--font-display);
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+
+  .text-lead {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.14;
+    letter-spacing: 0.196px;
+  }
+
+  .text-tagline {
+    font-family: var(--font-display);
+    font-size: 21px;
+    font-weight: 600;
+    line-height: 1.19;
+    letter-spacing: 0.231px;
+  }
+
+  .text-nav-link {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.12px;
+  }
+
+  .text-fine-print {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.12px;
+  }
+
+  .text-caption-strong {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.29;
+    letter-spacing: -0.224px;
+  }
+
+  .text-dense-link {
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 2.41;
+  }
+
+  @media (max-width: 1068px) {
+    .text-hero-display {
+      font-size: 40px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .text-hero-display {
+      font-size: 34px;
+    }
+
+    .text-display-lg {
+      font-size: 34px;
+    }
+  }
+
+  @media (max-width: 419px) {
+    .text-hero-display {
+      font-size: 28px;
+    }
+  }
+
+  .prose-apple h1 {
+    font-size: 34px;
+    line-height: 1.2;
+    letter-spacing: -0.374px;
+    margin: 2rem 0 1rem;
+  }
+
+  .prose-apple h2 {
+    font-size: 28px;
+    line-height: 1.25;
+    margin: 1.75rem 0 0.75rem;
+  }
+
+  .prose-apple h3 {
+    font-size: 21px;
+    line-height: 1.3;
+    margin: 1.5rem 0 0.5rem;
+  }
+
+  .prose-apple p {
+    margin: 1rem 0;
+  }
+
+  .prose-apple ul,
+  .prose-apple ol {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+  }
+
+  .prose-apple li {
+    margin: 0.35rem 0;
+  }
+
+  .prose-apple blockquote {
+    border-left: 3px solid var(--color-hairline);
+    padding-left: 1rem;
+    color: var(--color-ink-muted-80);
+    margin: 1.25rem 0;
+  }
+
+  .prose-apple table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 15px;
+  }
+
+  .prose-apple th,
+  .prose-apple td {
+    border: 1px solid var(--color-hairline);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+  }
+
+  .prose-apple th {
+    background: var(--color-canvas-parchment);
+    font-weight: 600;
+  }
+}

@@ -1,0 +1,13 @@
+.git
+node_modules
+.next
+out
+coverage
+.vercel
+.DS_Store
+*.log
+.env
+.env.*
+deploy/.env
+uploads
+src/generated/prisma

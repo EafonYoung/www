@@ -1,0 +1,32 @@
+# ============================================
+# www.eafon.net - Docker Compose 部署配置
+# ============================================
+# 必须与 blog 使用不同的 compose 项目名，否则会在同一项目下互相覆盖容器
+
+name: www
+
+services:
+  app:
+    build:
+      context: ../
+      dockerfile: deploy/Dockerfile
+    container_name: www-app
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: ${DATABASE_URL}
+      NEXT_PUBLIC_SITE_URL: ${SITE_URL}
+      UPLOAD_DIR: /app/uploads
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "127.0.0.1:3001:3001"
+    volumes:
+      - /data/project/blog/uploads:/app/uploads:ro
+    networks:
+      - postgres
+
+networks:
+  postgres:
+    external: true
+    name: ${POSTGRES_DOCKER_NETWORK}
