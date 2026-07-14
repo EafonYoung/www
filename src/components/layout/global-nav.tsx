@@ -10,6 +10,7 @@ const navItems = [
   { href: "/", label: "首页" },
   { href: "/notes", label: "笔记" },
   { href: "/bookmarks", label: "书签" },
+  { href: "/tools", label: "工具" },
 ];
 
 export function GlobalNav() {

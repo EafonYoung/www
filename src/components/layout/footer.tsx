@@ -55,15 +55,20 @@ export function Footer() {
       </div>
 
       <div className="mx-auto mt-12 max-w-[var(--grid-max)] border-t border-hairline pt-6">
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-fine-print text-ink-muted-48">
+        <div className="grid grid-cols-1 gap-2 text-center sm:grid-cols-3 sm:items-center">
+          <p className="text-fine-print text-ink-muted-48 sm:text-left">
             Copyright © {year} Eafon. All rights reserved.
+          </p>
+          <p className="text-fine-print text-left text-ink-muted-48 sm:mx-auto sm:w-fit">
+            Memento Mori. Live Fully.
+            <br />
+            向死而生
           </p>
           <a
             href="https://beian.miit.gov.cn/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-fine-print text-ink-muted-48 hover:text-primary"
+            className="text-fine-print text-ink-muted-48 hover:text-primary sm:text-right"
           >
             粤ICP备2026091603号-1
           </a>

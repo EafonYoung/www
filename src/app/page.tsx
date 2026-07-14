@@ -30,7 +30,7 @@ export default async function HomePage() {
         </div>
       </ProductTile>
 
-      <ProductTile variant="parchment">
+      <ProductTile variant="light">
         <div className="mx-auto max-w-[var(--content-max)]">
           <div className="mb-8 flex items-end justify-between gap-4">
             <div>
@@ -62,20 +62,6 @@ export default async function HomePage() {
               ))}
             </div>
           )}
-        </div>
-      </ProductTile>
-
-      <ProductTile variant="dark">
-        <div className="mx-auto max-w-[var(--content-max)] text-center">
-          <h2 className="text-display-lg text-body-on-dark">书签导航</h2>
-          <p className="text-lead mx-auto mt-4 max-w-xl text-body-muted">
-            常用开发资源与工具网站收录
-          </p>
-          <div className="mt-8">
-            <Button href="/bookmarks" variant="text-on-dark">
-              浏览书签 →
-            </Button>
-          </div>
         </div>
       </ProductTile>
     </>
