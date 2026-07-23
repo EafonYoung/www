@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { WrenchIcon } from "lucide-react";
+import {
+  BookUpIcon,
+  BracesIcon,
+  ClockArrowRightIcon,
+  type LucideIcon,
+} from "lucide-react";
 import { ProductTile } from "@/components/ui/product-tile";
 
 export const metadata: Metadata = {
@@ -8,11 +13,29 @@ export const metadata: Metadata = {
   description: "常用开发工具集合",
 };
 
-const tools = [
+const tools: {
+  slug: string;
+  name: string;
+  description: string;
+  icon: LucideIcon;
+}[] = [
   {
     slug: "tx-media-push",
     name: "腾讯媒资推送",
     description: "查询腾讯媒资数据并推送到同步服务",
+    icon: BookUpIcon,
+  },
+  {
+    slug: "json-formatter",
+    name: "JSON 格式化",
+    description: "在线 JSON 格式化与压缩工具",
+    icon: BracesIcon,
+  },
+  {
+    slug: "time-converter",
+    name: "时间转换",
+    description: "时间戳与时间相互转换，支持秒 / 毫秒",
+    icon: ClockArrowRightIcon,
   },
 ];
 
@@ -28,17 +51,17 @@ export default function ToolsPage() {
         </header>
 
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {tools.map((tool) => (
+          {tools.map(({ slug, name, description, icon: Icon }) => (
             <Link
-              key={tool.slug}
-              href={`/tools/${tool.slug}`}
+              key={slug}
+              href={`/tools/${slug}`}
               className="flex items-start gap-3 rounded-lg border border-hairline bg-canvas p-4 transition-colors hover:border-primary/30"
             >
-              <WrenchIcon className="mt-0.5 h-5 w-5 shrink-0 text-ink-muted-48" />
+              <Icon className="mt-0.5 h-5 w-5 shrink-0 text-ink-muted-48" />
               <div className="min-w-0 flex-1">
-                <h2 className="text-[15px] font-semibold">{tool.name}</h2>
+                <h2 className="text-[15px] font-semibold">{name}</h2>
                 <p className="mt-1 text-[13px] text-ink-muted-48">
-                  {tool.description}
+                  {description}
                 </p>
               </div>
             </Link>
